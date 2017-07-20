@@ -1,0 +1,122 @@
+doctype html
+html
+  head
+    script(type='text/javascript').
+      window.onload = function () {
+      var chart = new CanvasJS.Chart("chartContainer",
+      {
+      title:{
+      text: "Charts Example:"
+      },
+      data: [
+      {
+      type: "line",
+      dataPoints: [
+      { x: 10, y: 450 },
+      { x: 20, y: 414 },
+      { x: 30, y: 520 },
+      { x: 40, y: 460 },
+      { x: 50, y: 450 },
+      { x: 60, y: 500 },
+      { x: 70, y: 480 }
+      ]
+      }
+      ]
+      });
+      chart.render();
+      }
+    script(type='text/javascript', src='https://canvasjs.com/assets/script/canvasjs.min.js')
+  style.
+    .button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    }
+    input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    }
+    input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    }
+    input[type=submit]:hover {
+    background-color: #45a049;
+    }
+    div {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    }
+  body
+    h3 CRUD Operations
+    div
+      label Read Message From DataBase:
+      p #{message}
+      p #{data}
+      button
+        a(href='http://localhost:3000/') Index Page
+      br
+      form(action='http://localhost:3000/insert', method='post')
+        label Inser Data Into Database:
+        input(type='text', placeholder='Your Data....', name='data', required='true')
+        input(type='submit', value='Insert')
+      br
+      form(action='http://localhost:3000/update', method='post')
+        label Update Data:
+        br
+        label Data ID:
+        input(type='text', placeholder='Data ID', name='id', required='true')
+        label Data
+        input(type='text', placeholder='Your Data....', name='data', required='true')
+        input(type='submit', value='Update')
+      br
+      lable Delete Data
+      br
+      form(action='http://localhost:3000/delete', method='post')
+        label Data ID:
+        input(type='text', placeholder='Data ID', name='id', required='true')
+        input(type='submit', value='Delete')
+    div
+      h1 Please Input the Co-ordinates of map
+      br
+      label Longitude:
+      input#lg(type='text', placeholder='Longitude', name='Longitude', required='true', value='37.84')
+      label Latitude:
+      input#la(type='text', placeholder='Latitude', name='Latitude', required='true', value='22.67')
+      button(type='submit', onclick='myMap()') Search
+    br
+    #googleMap(style='width:100%;height:400px; border:2px;')
+    br
+    #chartContainer(style='height: 300px; width: 100%; border:2px')
+  script.
+    function myMap(){
+    var Longitude = document.getElementById('lg').value;
+    var Latitude = document.getElementById('la').value;
+    console.log(Longitude);
+    console.log(Latitude);
+    var mapProp= {
+    center:new google.maps.LatLng(Longitude,Latitude),
+    zoom:5,
+    };
+    var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+    }
+  script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAolVHZ-nwu5-N52J78cpCh_ue2rxgx0IY&callback=myMap')
